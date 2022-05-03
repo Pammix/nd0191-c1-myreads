@@ -1,21 +1,27 @@
 import '../App.css';
 import ListBooks from './ListBooks';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import * as BooksAPI from '../BooksAPI';
 
 const SearchBook = ({ books, onUpdateBook }) => {
   const [query, setQuery] = useState('');
 
-  const updateQuery = (query) => {
-    setQuery(query.trim());
-  };
+  const [queryBooks, setQueryBooks] = useState([]);
 
-  const showingBooks =
-    query === ''
-      ? books
-      : books.filter((c) =>
-          c.title.toLowerCase().includes(query.toLowerCase())
-        );
+  const updateQuery = (query) => {
+    setQuery(query);
+    if (query) {
+      const searchBooks = async () => {
+        const res = await BooksAPI.search(query, 100);
+        let r = res === undefined ? [] : res;
+        setQueryBooks(r);
+      };
+      searchBooks();
+    } else {
+      setQueryBooks([]);
+    }
+  };
 
   return (
     <div className="search-books">
@@ -33,7 +39,7 @@ const SearchBook = ({ books, onUpdateBook }) => {
         </div>
       </div>
       <ListBooks
-        books={showingBooks}
+        books={queryBooks}
         onSearch={true}
         onUpdateBook={onUpdateBook}
       />

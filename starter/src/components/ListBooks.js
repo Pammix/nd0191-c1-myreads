@@ -18,9 +18,9 @@ const ListBooks = ({ books, onUpdateBook, onSearch }) => {
                 {books
                   .filter((book) => book.shelf === 'currentlyReading')
                   .map((book) => (
-                    <li key={book.title}>
+                    <li key={book.id}>
                       <Book
-                        key={book.title}
+                        key={book.id}
                         book={book}
                         updateShelfBook={(e) => handelUpdateBook(book, e)}
                       />
@@ -35,9 +35,9 @@ const ListBooks = ({ books, onUpdateBook, onSearch }) => {
                 {books
                   .filter((book) => book.shelf === 'wantToRead')
                   .map((book) => (
-                    <li key={book.title}>
+                    <li key={book.id}>
                       <Book
-                        key={book.title}
+                        key={book.id}
                         book={book}
                         updateShelfBook={(e) => handelUpdateBook(book, e)}
                       />
@@ -51,9 +51,9 @@ const ListBooks = ({ books, onUpdateBook, onSearch }) => {
                 {books
                   .filter((book) => book.shelf === 'read')
                   .map((book) => (
-                    <li key={book.title}>
+                    <li key={book.id}>
                       <Book
-                        key={book.title}
+                        key={book.id}
                         book={book}
                         updateShelfBook={(e) => handelUpdateBook(book, e)}
                       />
@@ -72,10 +72,10 @@ const ListBooks = ({ books, onUpdateBook, onSearch }) => {
           <div>
             <div className="bookshelf-books">
               <ol className="books-grid">
-                {books.map((book) => (
-                  <li key={book.title}>
+                {books?.map((book) => (
+                  <li key={book.id}>
                     <Book
-                      key={book.title}
+                      key={book.id}
                       book={book}
                       updateShelfBook={(e) => handelUpdateBook(book, e)}
                     />

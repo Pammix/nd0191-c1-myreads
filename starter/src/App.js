@@ -19,11 +19,15 @@ function App() {
 
   const handelUpdate = async (book, event) => {
     BooksAPI.update(book, event.target.value);
-    setBooks(
-      books.map((el) =>
-        el.title === book.title ? { ...el, shelf: event.target.value } : el
-      )
-    );
+    if (books.includes(book)) {
+      setBooks(
+        books.map((el) =>
+          el.title === book.title ? { ...el, shelf: event.target.value } : el
+        )
+      );
+    } else {
+      setBooks(books.concat({ ...book, shelf: event.target.value }));
+    }
   };
 
   return (
