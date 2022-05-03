@@ -1,8 +1,9 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-
 import ListBooks from './components/ListBooks';
+import SearchBook from './components/SearchBook';
 import * as BooksAPI from './BooksAPI';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -17,8 +18,7 @@ function App() {
   }, []);
 
   const handelUpdate = async (book, event) => {
-    const res = BooksAPI.update(book, event.target.value);
-
+    BooksAPI.update(book, event.target.value);
     setBooks(
       books.map((el) =>
         el.title === book.title ? { ...el, shelf: event.target.value } : el
@@ -27,17 +27,28 @@ function App() {
   };
 
   return (
-    <div className="app">
-      <div className="list-books">
-        <div className="list-books-title">
-          <h1>MyReads</h1>
-        </div>
-        {console.log(books)}
-        <ListBooks books={books} onUpdateBook={handelUpdate} />
+    <div>
+      <div className="list-books-title">
+        <h1>MyReads</h1>
       </div>
-      <div className="open-search">
-        <a>Add a book</a>
-      </div>
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={
+            <ListBooks
+              books={books}
+              onUpdateBook={handelUpdate}
+              onSearch={false}
+            />
+          }
+        />
+        <Route
+          exact
+          path="/search"
+          element={<SearchBook books={books} onUpdateBook={handelUpdate} />}
+        />
+      </Routes>
     </div>
   );
 }
