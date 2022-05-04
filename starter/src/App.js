@@ -19,13 +19,16 @@ function App() {
 
   const handelUpdate = async (book, event) => {
     BooksAPI.update(book, event.target.value);
-    if (books.includes(book)) {
+    console.log(books);
+    console.log(book.shelf);
+    if (books.filter((b) => b.id === book.id).length > 0) {
       setBooks(
         books.map((el) =>
           el.title === book.title ? { ...el, shelf: event.target.value } : el
         )
       );
     } else {
+      console.log(book);
       setBooks(books.concat({ ...book, shelf: event.target.value }));
     }
   };

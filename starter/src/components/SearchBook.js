@@ -14,8 +14,13 @@ const SearchBook = ({ books, onUpdateBook }) => {
     if (query) {
       const searchBooks = async () => {
         const res = await BooksAPI.search(query, 100);
+        console.log(res);
         let r = res === undefined ? [] : res;
-        setQueryBooks(r);
+        if (Array.isArray(r)) {
+          setQueryBooks(r);
+        } else {
+          setQueryBooks([]);
+        }
       };
       searchBooks();
     } else {
@@ -38,6 +43,7 @@ const SearchBook = ({ books, onUpdateBook }) => {
           />
         </div>
       </div>
+      {console.log(queryBooks)}
       <ListBooks
         books={queryBooks}
         onSearch={true}

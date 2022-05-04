@@ -1,4 +1,5 @@
 const Book = ({ book, updateShelfBook }) => {
+
   return (
     <div className="book">
       <div className="book-top">
@@ -7,7 +8,7 @@ const Book = ({ book, updateShelfBook }) => {
           style={{
             width: 128,
             height: 193,
-            backgroundImage: `url(${book.imageLinks.smallThumbnail})`
+            backgroundImage: `url(${book?.imageLinks?.smallThumbnail})`
           }}
         ></div>
         <div className="book-shelf-changer">
