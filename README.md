@@ -2,6 +2,10 @@
 
 Final assessment project for Udacity's React Fundamentals course. 
 
+# DEMO LIVE:
+
+https://snazzy-tanuki-0d69c9.netlify.app/
+
 ## TL;DR
 
 To get started :
