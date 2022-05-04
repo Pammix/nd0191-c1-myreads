@@ -1,5 +1,4 @@
 const Book = ({ book, updateShelfBook }) => {
-
   return (
     <div className="book">
       <div className="book-top">
@@ -16,7 +15,7 @@ const Book = ({ book, updateShelfBook }) => {
             value={book.shelf ? book.shelf : 'none'}
             onChange={updateShelfBook}
           >
-            <option value="none" disabled>
+            <option value="move" disabled>
               Move to...
             </option>
             <option value="currentlyReading">Currently Reading</option>

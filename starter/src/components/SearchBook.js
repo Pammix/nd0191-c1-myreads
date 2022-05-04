@@ -1,6 +1,6 @@
 import '../App.css';
 import ListBooks from './ListBooks';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as BooksAPI from '../BooksAPI';
 
@@ -14,9 +14,15 @@ const SearchBook = ({ books, onUpdateBook }) => {
     if (query) {
       const searchBooks = async () => {
         const res = await BooksAPI.search(query, 100);
-        console.log(res);
         let r = res === undefined ? [] : res;
         if (Array.isArray(r)) {
+          const map1 = new Map();
+          books.map((b) => map1.set(b.title, b.shelf));
+          r.map(
+            (el) =>
+              (el.shelf =
+                map1.get(el.title) !== undefined ? map1.get(el.title) : 'none')
+          );
           setQueryBooks(r);
         } else {
           setQueryBooks([]);
